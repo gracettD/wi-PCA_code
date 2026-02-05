@@ -61,6 +61,12 @@ Install the required Python packages (see `requirements.txt`).
 
 ### Reproducing tables and figures
 
+Master script (`run_all.py`): for convenience, you can reproduce Tables 2–4 and Figure 3 in the correct order using the master script:
+
+```bash
+python3 run_all.py
+```
+
 Run the following scripts from the repository root:
 
 - **Table 2**: `python3 src/Simulation_Table2.py`
