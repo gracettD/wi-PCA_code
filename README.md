@@ -1,6 +1,6 @@
 # Factor Analysis for Large Non-Stationary Panels with Endogenous Missingness and Applications to Causal Inference
 
-This repository contains the replication code for the paper **“Factor Analysis for Large Non-Stationary Panels with Endogenous Missingness and Applications to Causal Inference.”**
+This repository contains the replication code for the paper **“Factor Analysis for Large Non-Stationary Panels with Endogenous Missingness and Applications to Causal Inference”**.
 
 ## 1. Overview
 
