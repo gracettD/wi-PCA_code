@@ -72,3 +72,11 @@ If you do not have access to the licensed data, you can run the empirical script
 
 ```bash
 cp beer_sales_contaminated.csv beer_sales.csv
+```
+
+Approximate run-time on a MacBook Pro (Apple M4 Pro, 24 GB memory):
+
+- `Simulation_Table2.py`: ~90 minutes
+- `Empirical_Table3.py`: ~20 minutes
+- `Empirical_Table4.py`: ~70 hours (with the vast majority of the time spent on variance estimation for the TWFE estimator. If TWFE variance estimation is approximated using wi-PCA with zero factor, the run-time drops to ~50 minutes.)
+- `Empirical_Figure3.py`: <1 minute
