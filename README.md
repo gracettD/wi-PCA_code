@@ -4,17 +4,17 @@ This repository contains the replication code for the paper **“Factor Analysis
 
 ## 1. Overview
 
-The main estimator implementations are in `Estimator.py`. Scripts that reproduce the paper’s results are:
+The main estimator implementations are in `src/Estimator.py`. Scripts that reproduce the paper’s results are:
 
-- **Table 2**: `Simulation_Table2.py` (relative MSE of common components for different estimators)
-- **Table 3**: `Empirical_Table3.py` (synthetic treatment-pattern results; outcome unit: $100/store)
-- **Table 4**: `Empirical_Table4.py` (ATT estimates for treated states; outcome unit: $100/store)
-- **Figure 3**: `Empirical_Figure3.py` (observed and estimated control series of per-store beer sales)
+- **Table 2**: `src/Simulation_Table2.py` (relative MSE of common components for different estimators)
+- **Table 3**: `src/Empirical_Table3.py` (synthetic treatment-pattern results; outcome unit: $100/store)
+- **Table 4**: `src/Empirical_Table4.py` (ATT estimates for treated states; outcome unit: $100/store)
+- **Figure 3**: `src/Empirical_Figure3.py` (observed and estimated control series of per-store beer sales)
 
 Supporting scripts:
 
-- `ATT_estimate.py`: computes ATT, bias, and RMSE (used in Table 3)
-- `data_processing.py`: constructs analysis datasets from the licensed raw data (see Section 2)
+- `src/ATT_estimate.py`: computes ATT, bias, and RMSE (used in Table 3)
+- `src/data_processing.py`: constructs analysis datasets from the licensed raw data (see Section 2)
 
 ## 2. Data availability and provenance
 
@@ -28,11 +28,11 @@ Researchers with access can obtain the data as follows:
 
 1. Log into the Kilts Center for Marketing Data Center portal: `https://marketingdata.chicagobooth.edu/Login/ResearcherLoginpage`.
 2. Download weekly NielsenIQ retail scanner sales data from January 1, 2017 to December 26, 2020.
-3. Place the raw extracts into the folder structure expected by `data_processing.py`.
+3. Place the raw extracts into the folder structure expected by `src/data_processing.py`.
 
 ### Data construction
 
-Run `data_processing.py` to construct the analysis panels used in the empirical analysis. The processing steps include:
+Run `src/data_processing.py` to construct the analysis panels used in the empirical analysis. The processing steps include:
 
 - aggregating the target products,
 - aggregating beer sales to the state-week level,
@@ -41,17 +41,17 @@ Run `data_processing.py` to construct the analysis panels used in the empirical 
 
 The script outputs:
 
-- `beer_sales.csv`: state-by-week outcome panel (beer sales per store)
-- `treatment.csv`: state-by-week treatment indicator
+- `data/beer_sales.csv`: state-by-week outcome panel (beer sales per store)
+- `data/treatment.csv`: state-by-week treatment indicator
 
 ### Data included in this replication package
 
 To allow users to run the code end-to-end without access to the licensed data, this repository includes:
 
-- `beer_sales_contaminated.csv`: a perturbed version of the constructed state-by-week outcome panel with additive Gaussian noise (generated in `data_processing.py`)
-- `treatment.csv`: the constructed treatment panel
+- `data/beer_sales_contaminated.csv`: a perturbed version of the constructed state-by-week outcome panel with additive Gaussian noise (generated in `src/data_processing.py`)
+- `data/treatment.csv`: the constructed treatment panel
 
-**Important note:** `beer_sales_contaminated.csv` is provided as a computational example and will generally not reproduce the exact empirical results reported in the paper. Users with access to the licensed data should run `data_processing.py` to generate the non-perturbed `beer_sales.csv` and then rerun the empirical scripts.
+**Important note:** `data/beer_sales_contaminated.csv` is provided as a computational example and will generally not reproduce the exact empirical results reported in the paper. Users with access to the licensed data should run `data/data_processing.py` to generate the non-perturbed `data/beer_sales.csv` and then rerun the empirical scripts.
 
 ## 3. Running the code
 
@@ -63,12 +63,12 @@ Install the required Python packages (see `requirements.txt`).
 
 Run the following scripts from the repository root:
 
-- **Table 2**: `python3 Simulation_Table2.py`
-- **Table 3**: `python3 Empirical_Table3.py`
-- **Table 4**: `python3 Empirical_Table4.py`
-- **Figure 3**: `python3 Empirical_Figure3.py`
+- **Table 2**: `python3 src/Simulation_Table2.py`
+- **Table 3**: `python3 src/Empirical_Table3.py`
+- **Table 4**: `python3 src/Empirical_Table4.py`
+- **Figure 3**: `python3 src/Empirical_Figure3.py`
 
-If you do not have access to the licensed data, you can run the empirical scripts using the included perturbed dataset by creating `beer_sales.csv` from the contaminated file (so the scripts find `beer_sales.csv` without modification), e.g.:
+If you do not have access to the licensed data, you can run the empirical scripts using the included perturbed dataset by creating `data/beer_sales.csv` from the contaminated file (so the scripts find `data/beer_sales.csv` without modification), e.g.:
 
 ```bash
 cp beer_sales_contaminated.csv beer_sales.csv
@@ -76,7 +76,7 @@ cp beer_sales_contaminated.csv beer_sales.csv
 
 Approximate run-time on a MacBook Pro (Apple M4 Pro, 24 GB memory):
 
-- `Simulation_Table2.py`: ~90 minutes
-- `Empirical_Table3.py`: ~20 minutes
-- `Empirical_Table4.py`: ~70 hours (with the vast majority of the time spent on variance estimation for the TWFE estimator. If TWFE variance estimation is approximated using wi-PCA with zero factor, the run-time drops to ~50 minutes.)
-- `Empirical_Figure3.py`: <1 minute
+- `src/Simulation_Table2.py`: ~90 minutes
+- `src/Empirical_Table3.py`: ~20 minutes
+- `src/Empirical_Table4.py`: ~70 hours (with the vast majority of the time spent on variance estimation for the TWFE estimator. If TWFE variance estimation is approximated using wi-PCA with zero factor, the run-time drops to ~50 minutes.)
+- `src/Empirical_Figure3.py`: <1 minute
